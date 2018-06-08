@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import App from '@/container/app';
-import appSaga from '@/saga/app';
+import App from '@/containers/app';
+import appSaga from '@/sagas/app';
 
-import reducer from '@/reducer';
+import reducer from '@/reducers';
 import { initialState } from '@/declare';
 import createSagaMiddleware from 'redux-saga';
 

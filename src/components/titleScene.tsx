@@ -1,20 +1,20 @@
 import * as React from 'react';
+import { Scene } from '@/declare';
 
 export interface Props {
-  hoge: number;
 }
 
 export interface Handlers {
-  handleStartClick: (amount: number) => void;
+  handleStartClick: () => void;
 }
 
-export const title = (state: Props & Handlers) => {
+export const titleScene = (state: Props & Handlers) => {
   return (
     <div>
       <h1>game title</h1>
       <button
         onClick={() => {
-          state.handleStartClick(1);
+          state.handleStartClick();
         }}
       >
         start

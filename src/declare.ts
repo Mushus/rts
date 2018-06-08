@@ -1,5 +1,6 @@
 export enum SceneType {
-  Title = 'title'
+  Title = 'title',
+  Game = 'game',
 }
 
 export interface Scene {
