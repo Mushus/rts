@@ -1,27 +1,15 @@
 import * as React from 'react';
+import { Scene, SceneType } from '@/declare';
+import { title } from '@/component/title';
 
 export interface Props {
-  hoge: number;
+  scene: Scene;
 }
 
 export interface Handlers {
   handleHogeClick: (amount: number) => void;
 }
 
-export const App = (state: Props & Handlers) => {
-  return (
-    <div>
-      <p>
-        hello world!
-        {state.hoge}
-      </p>
-      <button
-        onClick={() => {
-          state.handleHogeClick(1);
-        }}
-      >
-        hoge
-      </button>
-    </div>
-  );
+export const app = (state: Props & Handlers) => {
+  return <div>{state.scene.type == SceneType.Title && <title />}</div>;
 };

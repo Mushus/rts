@@ -1,14 +1,14 @@
 import { connect, Dispatch } from 'react-redux';
-import { App, Props, Handlers } from '@/component/app';
+import { Title, Props, Handlers } from '@/component/title';
 import { setName } from '@/reducer';
 
 const mapStateToProps = (state: any): Props => state;
 
 const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
-  handleHogeClick: amount => dispatch(setName({ amount }))
+  handleStartClick: amount => dispatch(setName({ amount }))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(Title);
