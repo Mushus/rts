@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Scene } from '@/declare';
 
-export interface Props {
-}
+export interface Props {}
 
 export interface Handlers {
   handleStartClick: () => void;

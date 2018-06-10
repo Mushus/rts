@@ -6,11 +6,14 @@ import { SceneType } from '@/declare';
 const mapStateToProps = (state: any): Props => state;
 
 const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
-  handleStartClick: () => dispatch(transitionScene({
-    scene: {
-      type: SceneType.Game
-    }
-  }))
+  handleStartClick: () =>
+    dispatch(
+      transitionScene({
+        scene: {
+          type: SceneType.Title
+        }
+      })
+    )
 });
 
 export default connect(

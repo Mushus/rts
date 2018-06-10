@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import App from '@/containers/app';
-import appSaga from '@/sagas/app';
+import createSagaMiddleware from 'redux-saga';
+import { createStore, applyMiddleware } from 'redux';
 
+import App from '@/containers/app';
 import reducer from '@/reducers';
 import { initialState } from '@/declare';
-import createSagaMiddleware from 'redux-saga';
+import appSaga from '@/sagas/app';
 
 const sagaMiddreware = createSagaMiddleware();
 const store = createStore(
@@ -16,6 +16,8 @@ const store = createStore(
   applyMiddleware(sagaMiddreware)
 );
 sagaMiddreware.run(appSaga);
+
+export default store;
 
 ReactDOM.render(
   <Provider store={store}>

@@ -11,9 +11,9 @@ export interface Handlers {
   handleHogeClick: () => void;
 }
 
-export const app = (state: Props & Handlers) => {
-  return <div>
+export const app = (state: Props & Handlers) => (
+  <div>
     {state.scene.type == SceneType.Title && <TitleScene />}
     {state.scene.type == SceneType.Game && <GameScene />}
-  </div>;
-};
+  </div>
+);

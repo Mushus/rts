@@ -1,6 +1,6 @@
 export enum SceneType {
   Title = 'title',
-  Game = 'game',
+  Game = 'game'
 }
 
 export interface Scene {
@@ -18,3 +18,7 @@ export const initialState: State = {
   },
   hoge: 1
 };
+
+export interface GameSceneState extends State {
+  count: number;
+}

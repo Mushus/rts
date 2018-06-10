@@ -1,10 +1,12 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom';
 import { Scene, State } from '@/declare';
-import {Stage} from 'react-pixi-fiber'
+import { Stage } from 'react-pixi-fiber';
+import { Provider } from 'react-redux';
 
-export interface Props {
-}
+import GameScreen from '@/containers/gameScene/gameScreen';
+
+export interface Props {}
 
 export interface Handlers {
   handleStartClick: () => void;
@@ -13,28 +15,11 @@ export interface Handlers {
 export const gameScene = (state: Props & Handlers) => {
   return (
     <div>
-      <h1>hoge title</h1>
-      <PixiContainer />
+      <h1>hoge destraoy</h1>
+      <button onClick={() => state.handleStartClick()}>back to title</button>
+      <div>
+        <GameScreen />
+      </div>
     </div>
   );
 };
-
-class PixiContainer extends React.PureComponent {
-  containerRef: React.RefObject<HTMLDivElement> = React.createRef();
-  componentDidMount() {
-    ReactDOM.render(<PixiApp />, this.containerRef.current)
-  }
-
-  componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(this.containerRef.current)
-  }
-
-  render() {
-    return <div ref={this.containerRef} />
-  }
-}
-
-const PixiApp = (state: State): JSX.Element => (
-  <Stage width={800} height={600} options={{ backgroundColor: 0xff8000 }}>
-  </Stage>
-);
