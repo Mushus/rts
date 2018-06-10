@@ -6,13 +6,15 @@ const actionCreator = actionCreatorFactory();
 
 export const nextTick = actionCreator<{ count: number }>('NEXT_TICK');
 
-export const nextTickHandler = (state: State, { count }: { count: number }) => (
-  {
-    ...state,
-    scene: {
-      ...state.scene,
-      count: count
-    }
+export const nextTickHandler = (
+  state: State,
+  { count }: { count: number }
+) => ({
+  ...state,
+  scene: {
+    ...state.scene,
+    count: count
+  }
 });
 
 const gameScene = upcastingReducer<State, State>().case(
