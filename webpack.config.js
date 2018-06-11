@@ -1,43 +1,50 @@
-const path = require("path");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.tsx",
+  mode: 'development',
+  entry: './src/index.tsx',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/
       },
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
+          'style-loader',
+          'css-loader',
+          'sass-loader'
         ]
       }
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".scss"],
+    extensions: ['.tsx', '.ts', '.js', '.scss'],
     alias: {
       '@': path.resolve(__dirname, 'src/'),
     }
   },
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
-    new ExtractTextPlugin("[name].css"),
+    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, 'public/index.html')
-    })
+    }),
+    new CopyWebpackPlugin(
+      [
+        path.resolve(__dirname, 'static', '*'),
+      ],
+      { copyUnmodified: true }
+    )
   ],
   watchOptions: {
     aggregateTimeout: 300,
