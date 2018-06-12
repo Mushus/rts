@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Stage, Text } from 'react-pixi-fiber';
-import { State, Scene, SceneType, GameSceneState } from '@/declare';
+import { Stage, Container, Sprite, Text } from 'react-pixi-fiber';
+import { State, Scene, SceneType, GameScene } from '@/declare';
+import { Texture } from 'pixi.js';
 import Timer from '@/lib/Timer';
 import { Keyboard, keyCode } from '@/lib/Keyboard';
 
+const image = './static/sprite.gif';
 export interface Props {
   scene: Scene;
 }
@@ -18,6 +20,8 @@ export interface KeyboardStatus {
 export interface Handlers {
   handleTimer: (count: number, keyboard: KeyboardStatus) => void;
 }
+
+const texture = Texture.fromImage(image);
 
 export class GameScreen extends React.PureComponent<Props & Handlers> {
   timer: Timer;
@@ -43,10 +47,16 @@ export class GameScreen extends React.PureComponent<Props & Handlers> {
 
   render() {
     const state = this.props as Props & Handlers;
-    const scene = { count: 0, ...state.scene };
+    const scene = state.scene as GameScene;
     return (
       <Stage width={800} height={600} options={{ backgroundColor: 0xff8000 }}>
-        <Text text={`${scene.count}`} x={200} y={200} />
+        <Container x={0} y={0}>
+          {scene.field.map((v, i) => {
+            const x = i % scene.width;
+            const y = Math.floor(i / scene.height);
+            return <Sprite texture={texture} x={x * 16} y={y * 16} />;
+          })}
+        </Container>
       </Stage>
     );
   }

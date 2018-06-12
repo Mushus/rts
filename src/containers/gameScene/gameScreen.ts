@@ -12,7 +12,6 @@ const mapStateToProps = (state: any): Props => state;
 
 const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
   handleTimer: (count: number, keyboard: KeyboardStatus) => {
-    console.log(JSON.stringify(keyboard));
     return dispatch(
       nextTick({
         count: count

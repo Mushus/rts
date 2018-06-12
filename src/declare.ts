@@ -3,20 +3,27 @@ export enum SceneType {
   Game = 'game'
 }
 
-export interface Scene {
-  type: SceneType;
+export interface GameScene {
+  type: SceneType.Game;
+  width: number;
+  height: number;
+  field: number[];
 }
+
+export interface TitleScene {
+  type: SceneType.Title;
+}
+
+export type Scene = GameScene | TitleScene;
 
 export interface State {
   scene: Scene;
-  hoge: number;
 }
 
 export const initialState: State = {
   scene: {
     type: SceneType.Title
-  },
-  hoge: 1
+  }
 };
 
 export interface GameSceneState extends State {

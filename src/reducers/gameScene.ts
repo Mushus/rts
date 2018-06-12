@@ -12,8 +12,7 @@ export const nextTickHandler = (
 ) => ({
   ...state,
   scene: {
-    ...state.scene,
-    count: count
+    ...state.scene
   }
 });
 
