@@ -128,16 +128,16 @@ export class Keyboard {
     this.keyupEvent = e => {
       this.keyup(e.keyCode);
     };
-    window.addEventListener('keydown', this.keydownEvent);
     window.addEventListener('keyup', this.keyupEvent);
+    window.addEventListener('keydown', this.keydownEvent);
   }
 
   keyup(key: number) {
-    this.keyStatus[key] = true;
+    this.keyStatus[key] = false;
   }
 
   keydown(key: number) {
-    this.keyStatus[key] = false;
+    this.keyStatus[key] = true;
   }
 
   isPress(key: number) {
@@ -145,7 +145,7 @@ export class Keyboard {
   }
 
   terminate() {
-    window.addEventListener('keydown', this.keydownEvent);
     window.addEventListener('keyup', this.keyupEvent);
+    window.addEventListener('keydown', this.keydownEvent);
   }
 }
