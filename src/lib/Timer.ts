@@ -11,6 +11,7 @@ function TimerWorker(fps: number) {
   postMessage('hoge');
   let start = performance.now();
   let count = 0;
+  let timerHandle: any = null;
   const timer = () => {
     const nextFrameTime = start + (++count * 1000) / fps;
     const nextFrameDuration = nextFrameTime - performance.now();
@@ -18,7 +19,11 @@ function TimerWorker(fps: number) {
     if (nextFrameDuration < 0) {
       timer();
     } else {
-      setTimeout(timer, nextFrameDuration);
+      if (timerHandle != null) {
+        clearTimeout(timerHandle);
+        timerHandle = null;
+      }
+      timerHandle = setTimeout(timer, nextFrameDuration);
     }
   };
   timer();
