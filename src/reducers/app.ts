@@ -17,9 +17,15 @@ const createDefaultScene = (type: SceneType): Scene => {
     case SceneType.Game:
       return {
         type: SceneType.Game,
-        width: 100,
-        height: 100,
-        field: new Array(100 * 100).fill(0)
+        camera: {
+          x: 0,
+          y: 0
+        },
+        field: {
+          width: 50,
+          height: 50,
+          source: new Array(50 * 50).fill(0)
+        }
       };
   }
 };

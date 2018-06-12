@@ -14,7 +14,8 @@ const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
   handleTimer: (count: number, keyboard: KeyboardStatus) => {
     return dispatch(
       nextTick({
-        count: count
+        count,
+        keyboard
       })
     );
   }

@@ -50,11 +50,11 @@ export class GameScreen extends React.PureComponent<Props & Handlers> {
     const scene = state.scene as GameScene;
     return (
       <Stage width={800} height={600} options={{ backgroundColor: 0xff8000 }}>
-        <Container x={0} y={0}>
-          {scene.field.map((v, i) => {
-            const x = i % scene.width;
-            const y = Math.floor(i / scene.height);
-            return <Sprite texture={texture} x={x * 16} y={y * 16} />;
+        <Container x={-scene.camera.x} y={-scene.camera.y}>
+          {scene.field.source.map((v, i) => {
+            const x = i % scene.field.width;
+            const y = Math.floor(i / scene.field.height);
+            return <Sprite key={i} texture={texture} x={x * 16} y={y * 16} />;
           })}
         </Container>
       </Stage>

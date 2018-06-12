@@ -5,9 +5,18 @@ export enum SceneType {
 
 export interface GameScene {
   type: SceneType.Game;
+  camera: GameCamera;
+  field: GameField;
+}
+
+export interface GameCamera {
+  x: number;
+  y: number;
+}
+export interface GameField {
   width: number;
   height: number;
-  field: number[];
+  source: number[];
 }
 
 export interface TitleScene {
