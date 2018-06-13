@@ -1,9 +1,9 @@
 import { connect, Dispatch } from 'react-redux';
 import { gameScene, Props, Handlers } from '@/components/gameScene';
 import { transitionScene } from '@/reducers/app';
-import { SceneType } from '@/declare';
+import { SceneType, State } from '@/declare';
 
-const mapStateToProps = (state: any): Props => state;
+const mapStateToProps = (state: State): Props => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
   handleStartClick: () =>

@@ -22,9 +22,9 @@ const createDefaultScene = (type: SceneType): Scene => {
           y: 0
         },
         field: {
-          width: 50,
-          height: 50,
-          source: new Array(50 * 50).fill(0)
+          width: 100,
+          height: 100,
+          source: new Array(100 * 100).fill(0)
         }
       };
   }

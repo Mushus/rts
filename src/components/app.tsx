@@ -4,7 +4,7 @@ import TitleScene from '@/containers/titleScene';
 import GameScene from '@/containers/gameScene';
 
 export interface Props {
-  scene: Scene;
+  sceneType: SceneType
 }
 
 export interface Handlers {
@@ -13,7 +13,7 @@ export interface Handlers {
 
 export const app = (state: Props & Handlers) => (
   <div>
-    {state.scene.type == SceneType.Title && <TitleScene />}
-    {state.scene.type == SceneType.Game && <GameScene />}
+    {state.sceneType == SceneType.Title && <TitleScene />}
+    {state.sceneType == SceneType.Game && <GameScene />}
   </div>
 );

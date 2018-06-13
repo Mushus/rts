@@ -6,9 +6,14 @@ import {
   KeyboardStatus
 } from '@/components/gameScene/gameScreen';
 import { nextTick } from '@/reducers/gameScene';
-import { SceneType } from '@/declare';
+import { SceneType, State, GameScene } from '@/declare';
 
-const mapStateToProps = (state: any): Props => state;
+const mapStateToProps = (state: State): Props => {
+  const scene = state.scene as GameScene;
+  return {
+    camera: scene.camera
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): Handlers => ({
   handleTimer: (count: number, keyboard: KeyboardStatus) => {
