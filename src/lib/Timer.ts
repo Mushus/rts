@@ -1,45 +1,5 @@
-// worker から送信するためのメソッド(ダミー)
-function postMessage(
-  message: any,
-  targetOrigin?: string,
-  transfer?: any[]
-): void {
-  // dummy
-}
-
-function TimerWorker(fps: number) {
-  postMessage('hoge');
-  let start = performance.now();
-  let count = 0;
-  let timerHandle: any = null;
-  const timer = () => {
-    const nextFrameTime = start + (++count * 1000) / fps;
-    const nextFrameDuration = nextFrameTime - performance.now();
-    postMessage({ count: count });
-    if (nextFrameDuration < 0) {
-      timer();
-    } else {
-      if (timerHandle != null) {
-        clearTimeout(timerHandle);
-        timerHandle = null;
-      }
-      timerHandle = setTimeout(timer, nextFrameDuration);
-    }
-  };
-  timer();
-}
-
-// TODO: 二次元配列が表現できない…
-type ScalarType = string | number | boolean | null;
-type JSONType = {
-  [s: string]: JSONType | JSONType[] | ScalarType[] | ScalarType;
-};
-
 // webworker の URL を function から生成する
-function run<T extends JSONType | ScalarType>(
-  fn: (options: T) => void,
-  options: T
-) {
+function run(fn: string, options: any) {
   const optionJson = JSON.stringify(options);
   return new Worker(
     URL.createObjectURL(
@@ -54,7 +14,31 @@ export default class Timer {
 
   constructor(func: (count: number) => void, fps?: number) {
     this.fps = fps != null ? fps! : 60;
-    this.worker = run(TimerWorker, this.fps);
+    this.worker = run(
+      `
+    function TimerWorker(fps) {
+      const start = performance.now();
+      let count = 0;
+      let timerHandle = null;
+      const timer = () => {
+        const nextFrameTime = start + (++count * 1000) / fps;
+        const nextFrameDuration = nextFrameTime - performance.now();
+        postMessage({ count: count });
+        if (nextFrameDuration < 0) {
+          timer();
+        } else {
+          if (timerHandle != null) {
+            clearTimeout(timerHandle);
+            timerHandle = null;
+          }
+          timerHandle = setTimeout(timer, nextFrameDuration);
+        }
+      };
+      timer();
+    }
+    `,
+      this.fps
+    );
     this.worker.onmessage = data => {
       const count = data.data.count as number;
       func && func(count);
